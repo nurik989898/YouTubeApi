@@ -9,15 +9,17 @@ import com.example.youtubeapi.ui.playlistvideos.PlaylistVideosActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>(),ItemClickListener{
     private val viewModel by lazy {  ViewModelProvider(this)[PlayListViewModel::class.java] }
-    private var playlist = arrayListOf<Items>()
-    private val playlistAdaptor by lazy { PlaylistAdaptor(playlist) }
+    private var playlist: ArrayList<Items>? = arrayListOf()
+    private val playlistAdaptor by lazy { playlist?.let { PlaylistAdaptor(it) } }
     override fun inflateViewBinding(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
     }
     override fun initViewModel() {
-        viewModel.getPlaylist().observe(this){data ->
-           playlist = data.items
-            playlistAdaptor.setListener(this)
+        viewModel.getPlaylist().observe(this){response ->
+           if (response.body() != null) {
+               playlist = response.body()?.items
+           }
+            playlistAdaptor?.setListener(this)
             binding.rvPlaylists.adapter = playlistAdaptor
         }
 
@@ -34,12 +36,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),ItemClickListener{
     override fun setUI() {
     }
 
-    override fun onItemClick(id: String) {
+    override fun onItemClick(id: String,title:String,desc: String) {
  //val intent = Intent(this,PlaylistVideosActivity::class.java)
   //      intent.putExtra("id",id)
    //     startActivity(intent)
         Intent(this,PlaylistVideosActivity::class.java).apply {
             putExtra("id", id)
+            putExtra("desc",desc)
+            putExtra("title",title)
             startActivity(this)
         }
     }

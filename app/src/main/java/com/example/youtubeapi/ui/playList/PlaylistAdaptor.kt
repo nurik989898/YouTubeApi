@@ -46,7 +46,7 @@ class PlaylistAdaptor(private var playlist:ArrayList<Items>): RecyclerView.Adapt
                     items.contentDetails.itemCount
                 )
             itemView.setOnClickListener {
-                onItemClickListener.onItemClick(items.id)
+                onItemClickListener.onItemClick(items.id,items.snippet.title,items.snippet.description)
 
             }
         }
@@ -57,5 +57,5 @@ class PlaylistAdaptor(private var playlist:ArrayList<Items>): RecyclerView.Adapt
 
 
     interface ItemClickListener {
-        fun onItemClick(id: String)
+        fun onItemClick(id: String,title:String,desc: String)
     }

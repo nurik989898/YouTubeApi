@@ -1,9 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
     tools:context=".ui.playlistvideos.PlaylistVideosActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="1dp"
+        app:popupTheme="@style/Theme.MaterialComponents.NoActionBar">
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:drawablePadding="5dp"
+            android:text="Back"
+            android:textColor="@color/red"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/arrow"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Playlists"
+            android:textStyle="bold"
+            android:paddingStart="78dp"
+            android:textColor="@color/red"
+            android:textSize="21sp"/>
+    </androidx.appcompat.widget.Toolbar>
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/main_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge"/>
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        app:contentScrim="@color/dark"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:background="@color/dark"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp">
+        <TextView
+            android:id="@+id/tv_playlist_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:layout_marginTop="24dp"
+            tools:text="Hi everyone this is Apple TV channel"/>
+        <TextView
+            android:id="@+id/tv_playlist_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:maxLines="6"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="We have lots of channels that you have been describe"/>
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+        <LinearLayout
+            android:id="@+id/video_counter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_video"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="12dp"
+    android:backgroundTint="@color/red"
+    android:contentDescription="button play"
+    android:src="@drawable/play"
+    app:layout_anchor="@id/main_appbar"
+    app:layout_anchorGravity="bottom|right|end"
+    app:maxImageSize="35dp"/>
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="38sp"
+        android:indeterminate="true"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

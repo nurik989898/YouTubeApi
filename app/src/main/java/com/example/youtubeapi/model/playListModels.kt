@@ -14,7 +14,6 @@ data class Thumbnails(
 )
 
 data class Snippet(
-    var publishedAt: String,
     var channelId: String,
     var title: String,
     var description: String,
@@ -23,7 +22,13 @@ data class Snippet(
     var tags: List<String>,
     var categoryId: String,
     var liveBroadcastContent: String,
-    var localized: Localized
+    var localized: Localized,
+    val playlistId: String,
+    val position: Int,
+    val publishedAt: String,
+    val resourceId: ResourceId,
+    val videoOwnerChannelId: String,
+    val videoOwnerChannelTitle: String
 )
 
 data class PageInfo(
@@ -73,5 +78,6 @@ data class ContentDetails(
     var caption: String,
     var licensedContent: Boolean,
     var contentRating: ContentRating,
-    var projection: String
+    var projection: String,
+    var videoPublishedAt: String
 )

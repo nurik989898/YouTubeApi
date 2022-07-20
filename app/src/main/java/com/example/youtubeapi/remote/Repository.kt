@@ -7,6 +7,7 @@ import com.example.youtubeapi.BuildConfig
 import com.example.youtubeapi.core.Object
 import com.example.youtubeapi.model.Playlist
 import com.example.youtubeapi.model.playListitems
+import com.example.youtubeapi.ui.playList.PlayListViewModel
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Response
 
@@ -21,7 +22,7 @@ class Repository {
         )
         emit(response)
     }
-    fun getplayListItems(playlistId: String): LiveData<Response<Playlist>> =
+    fun getplayListItems(playlistId: String): LiveData<Response<playListitems>> =
         liveData (Dispatchers.IO){
             val response = youTubeApi.getPlaylistsItems(
                 Object.PART,

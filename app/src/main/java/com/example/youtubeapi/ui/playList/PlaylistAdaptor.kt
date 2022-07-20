@@ -40,13 +40,13 @@ class PlaylistAdaptor(private var playlist:ArrayList<Items>): RecyclerView.Adapt
         fun onBind(items: Items) {
             binding.ivPlaylist.load(items.snippet.thumbnails.medium.url)
             binding.tvPlaylistTitle.text = items.snippet.title
-            binding.tvVideoCounter.text =
+            binding.tvVideoCounter.text = items.contentDetails.itemCount.toString() + " videos"
                 itemView.context.getString(
                     R.string.video_series,
                     items.contentDetails.itemCount
                 )
             itemView.setOnClickListener {
-                onItemClickListener.onItemClick(items.id,items.snippet.title,items.snippet.description)
+                onItemClickListener.onItemClick(items.id,items.snippet.title,items.snippet.title)
 
             }
         }

@@ -1,22 +1,25 @@
 package com.example.youtubeapi.ui.playlistvideos
+import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.youtubeapi.core.BaseActivity
 import com.example.youtubeapi.databinding.ActivityPlaylistVideosBinding
 import com.example.youtubeapi.extensions.gone
 import com.example.youtubeapi.extensions.visible
 import com.example.youtubeapi.model.Items
-import com.example.youtubeapi.ui.playList.PlayListViewModel
-import com.example.youtubeapi.ui.playList.PlaylistAdaptor
 
 class PlaylistVideosActivity :BaseActivity<ActivityPlaylistVideosBinding>(){
 
     private val viewModel by lazy {  ViewModelProvider(this)[PlayListitemsViewModel::class.java] }
     private var videos: ArrayList<Items>? = arrayListOf()
-    private val playlistAdaptor by lazy { videos?.let { PlaylistAdaptor(it) } }
-
+    private val playlistAdaptor by lazy { videos?.let { PlayListVideosAdaptor(it) } }
 
     override fun inflateViewBinding(): ActivityPlaylistVideosBinding {
        return ActivityPlaylistVideosBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding.rvVideo.adapter = playlistAdaptor
     }
 
     override fun initViewModel() {

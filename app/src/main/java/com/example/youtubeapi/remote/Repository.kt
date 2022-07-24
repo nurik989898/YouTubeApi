@@ -11,8 +11,7 @@ import com.example.youtubeapi.ui.playList.PlayListViewModel
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Response
 
-class Repository {
-    private  val youTubeApi = App.youTubeApi
+class Repository(private val youTubeApi: YouTubeApi){
     fun getPlaylist(): LiveData<Response<Playlist>> = liveData(Dispatchers.IO) {
         val response = youTubeApi.getPlaylists(
             Object.PART,

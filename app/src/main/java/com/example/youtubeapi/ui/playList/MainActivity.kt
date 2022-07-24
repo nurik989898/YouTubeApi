@@ -1,14 +1,13 @@
 package com.example.youtubeapi.ui.playList
 import android.content.Intent
-import android.util.Log
-import androidx.lifecycle.ViewModelProvider
 import com.example.youtubeapi.core.BaseActivity
 import com.example.youtubeapi.databinding.ActivityMainBinding
 import com.example.youtubeapi.model.Items
 import com.example.youtubeapi.ui.playlistvideos.PlaylistVideosActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(),ItemClickListener{
-    private val viewModel by lazy {  ViewModelProvider(this)[PlayListViewModel::class.java] }
+    private val viewModel:PlayListViewModel by viewModel()
     private var playlist: ArrayList<Items>? = arrayListOf()
     private val playlistAdaptor by lazy { playlist?.let { PlaylistAdaptor(it) } }
     override fun inflateViewBinding(): ActivityMainBinding {
